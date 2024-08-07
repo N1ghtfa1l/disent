@@ -27,7 +27,7 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={
+      <Route path="*" element={
         <div className="container">
           {countries.map((country) => (
             <CountryCard key={country.name.common} country={country} />

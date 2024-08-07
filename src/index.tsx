@@ -7,7 +7,7 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  <BrowserRouter basename='https://n1ghtfa1l.github.io/disent/'>
+  <BrowserRouter>
     <App />
   </BrowserRouter>
 );
