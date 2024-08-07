@@ -1,25 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import './css/App.css';
+import CountryCard from './components/CountryCard/ContryCard';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import PostService from './API/PostService';
+import { Route, Routes } from 'react-router-dom';
+import CountryInfo from './components/CountryInfo/CountryInfo';
+import { Country } from './types/type';
 
 function App() {
+  const [countries, setCountries] = useState<Country[]>([]);
+
+  useEffect(() => {
+    const fetchCountries = async () => {
+      try {
+        const data = await PostService.getAll();
+        setCountries(data);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+
+    fetchCountries();
+  }, []);
+
+ 
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path="/" element={
+        <div className="container">
+          {countries.map((country) => (
+            <CountryCard key={country.name.common} country={country} />
+          ))}
+        </div>
+      } />
+      <Route path="/country/:name" element={<CountryInfo />} />
+    </Routes>
   );
 }
 

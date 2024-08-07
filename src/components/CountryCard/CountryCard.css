@@ -1,0 +1,8 @@
+.flag-image {
+    width: 100%;
+    height: 180px; 
+    object-fit: cover; 
+  }
+  .moreBtn {
+    margin: 5px 0;
+  }
